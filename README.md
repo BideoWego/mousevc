@@ -74,7 +74,7 @@ end
 1. Create a view in your views directory
 
 ```erb
-# views/show_cheese.txt.erb
+<%# views/show_cheese.txt.erb %>
 
 Hello Mousevc!
 
