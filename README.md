@@ -32,6 +32,8 @@ $ gem install mousevc
 
 ## Usage
 
+# TODO: Add more complete usage guide
+
 1. Create a class that extends `Mousevc::App`
 
 ```ruby

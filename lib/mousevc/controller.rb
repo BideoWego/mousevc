@@ -42,5 +42,11 @@ module Mousevc
 			@view = options[:view]
 			@router = options[:router]
 		end
+
+		private
+			def hello_mousevc
+				puts Mousevc.art
+				Input.prompt
+			end
 	end
 end

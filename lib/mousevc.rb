@@ -8,6 +8,8 @@ require "mousevc/app"
 module Mousevc
 
 	##
+	# @todo Add author name and website to art
+	#
 	# @return [String] some pretty ASCII art
 
 	def self.art

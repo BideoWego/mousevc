@@ -44,9 +44,9 @@ module Mousevc
 		# 	- :views => relative path to views directory
 
 		def initialize(options={})
-			@controller = options[:controller]
-			@model = options[:model]
-			@action = options[:action]
+			@controller = options[:controller] ? options[:controller] : 'Controller' 
+			@model = options[:model] ? options[:model] : 'Model'
+			@action = options[:action] ? options[:action] : :hello_mousevc
 			@view = View.new(:dir => options[:views])
 		end
 
