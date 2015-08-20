@@ -1,8 +1,14 @@
 # Mousevc
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/mousevc`. To experiment with that code, run `bin/console` for an interactive prompt.
+	(`) (`)
+	=('o')=
+	  m m  
 
-TODO: Delete this and the text above, and describe your gem
+	MousevC
+	V     L
+	C     I
+
+A tiny mouse sized MVC framework to jump start command line apps. Written in Ruby.
 
 ## Installation
 
@@ -22,7 +28,64 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+1. Extend `Mousevc::App`
+
+```ruby
+\# jerry.rb
+
+require 'mousevc'
+
+Jerry < Mousevc::App
+end
+
+Jerry.new(
+	:controller => 'JerryController',
+	:model => 'JerryModel',
+	:action => ':find_cheese',
+	:views => 'relative/views/directory/path'
+)
+```
+
+1. Create your default controller
+
+```ruby
+\# jerry_controller.rb
+
+class JerryController < Mousevc::Controller
+	def find_cheese
+		cheese = @model.cheese
+		@view.render('show_cheese', :cheese => cheese)
+	end
+end
+```
+
+1. Create the corresponding model
+
+```ruby
+\# jerry_model.rb
+
+class JerryModel < Mousevc::Model
+	def cheese
+		@cheese = "Swiss cheese"
+	end
+end
+```
+
+1. Create a view in your views directory
+
+```ruby
+\# views/show_cheese.txt.erb
+
+Hello Mousevc!
+
+I like <%= @cheese %>!
+```
+
+1. Run mouse run!
+
+```shell
+$ ruby jerry.rb
+```
 
 ## Development
 
@@ -32,7 +95,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/mousevc. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/BideoWego/mousevc. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
 
 
 ## License
