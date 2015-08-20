@@ -5,42 +5,21 @@ require_relative 'error.rb'
 module Mousevc
 
 	##
-	# App is the top level class of Mousevc.
-	# App is the container for all of the objects
+	# The top level class of Mousevc.
+	# The container for all of the objects
 	# created within a Mousevc application.
+	# 
 
 	class App
 
 		##
-		# Creates a new App instance
-		#
-		# Expects a parameter of type `Hash`
-		# with the following format:
-		# * +:controller+ -> string name of
-		# the default controller class. This
-		# is the controller that will be 
-		# instantiated at the beginning of
-		# your program.
-		# * +:model+ -> string name of the
-		# model that corresponds to the
-		# default controller. This model
-		# will be available to the controller
-		# via it's @model attribute.
-		# * +:action+ -> symbol name of the
-		# method to call on the default
-		# controller at run time. This method
-		# will be the entry point for your
-		# application.
-		# * +:views+ -> The relative path to
-		# your views directory .e.g if your
-		# application lives in +app/+ and your
-		# views live in a sub-directory of
-		# +app/+ called +views+ then this
-		# parameter should be +'views'+.
+		# Creates a new +Mousevc::App+ instance
 		# 
-		# * *Params*:
-		# 	- +options+ -> the options hash
-		#
+		# @param options [Hash] expects the following keys:
+		# 	- :controller => string name of default controller class
+		# 	- :model => string name of default model class
+		# 	- :action => method to call on default controller
+		# 	- :views => relative path to views directory
 
 		def initialize(options={})
 			@controller = options[:controller]
@@ -51,22 +30,36 @@ module Mousevc
 			listen
 		end
 
-		def reset
-			@router = Router.new(
-				:controller => @controller,
-				:action => @action,
-				:model => @model,
-				:views => @views
-			)
-		end
+		private
 
-		def listen
-			begin
-				system('clear')
-				@router.route
-				reset if Input.reset?
-			end while ! Input.quit?
-			Input.clear
-		end
+			##
+			# Instantiates the router instance.
+			# Passes the router instance the initialization options.
+
+			def reset
+				@router = Router.new(
+					:controller => @controller,
+					:action => @action,
+					:model => @model,
+					:views => @views
+				)
+			end
+
+			##
+			# Runs the application loop.
+			# Clears the system view each iteration.
+			# Calls route on the router instance.
+			# 
+			# If the user is trying to reset or quit the application responds accordingly.
+			# Clears Input class variables before exit.
+
+			def listen
+				begin
+					system('clear')
+					@router.route if ! Input.quit?
+					reset if Input.reset?
+				end while ! Input.quit?
+				Input.clear
+			end
 	end
 end

@@ -20,28 +20,32 @@ gem 'mousevc'
 
 And then execute:
 
-    $ bundle
+```sh
+$ bundle
+```
 
 Or install it yourself as:
 
-    $ gem install mousevc
+```sh
+$ gem install mousevc
+```
 
 ## Usage
 
-1. Extend `Mousevc::App`
+1. Create a class that extends `Mousevc::App`
 
 ```ruby
 # jerry.rb
 
 require 'mousevc'
 
-Jerry < Mousevc::App
+class Jerry < Mousevc::App
 end
 
 Jerry.new(
 	:controller => 'JerryController',
 	:model => 'JerryModel',
-	:action => ':find_cheese',
+	:action => :find_cheese,
 	:views => 'relative/views/directory/path'
 )
 ```
@@ -83,7 +87,7 @@ I like <%= @cheese %>!
 
 1. Run mouse run!
 
-```sh
+```console
 $ ruby jerry.rb
 ```
 
