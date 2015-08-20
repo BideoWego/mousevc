@@ -83,7 +83,7 @@ I like <%= @cheese %>!
 
 1. Run mouse run!
 
-```shell
+```sh
 $ ruby jerry.rb
 ```
 
