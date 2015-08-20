@@ -31,7 +31,7 @@ Or install it yourself as:
 1. Extend `Mousevc::App`
 
 ```ruby
-\# jerry.rb
+# jerry.rb
 
 require 'mousevc'
 
@@ -49,7 +49,7 @@ Jerry.new(
 1. Create your default controller
 
 ```ruby
-\# jerry_controller.rb
+# jerry_controller.rb
 
 class JerryController < Mousevc::Controller
 	def find_cheese
@@ -62,7 +62,7 @@ end
 1. Create the corresponding model
 
 ```ruby
-\# jerry_model.rb
+# jerry_model.rb
 
 class JerryModel < Mousevc::Model
 	def cheese
@@ -73,8 +73,8 @@ end
 
 1. Create a view in your views directory
 
-```ruby
-\# views/show_cheese.txt.erb
+```erb
+# views/show_cheese.txt.erb
 
 Hello Mousevc!
 
