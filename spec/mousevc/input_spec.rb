@@ -46,13 +46,36 @@ describe Mousevc::Input do
 		end
 	end
 
-	describe '#prompts' do
-		it 'is read only'
-		it 'defaults to a hash with the default prompt'
+	describe '#prompt' do
+		it 'prompts the user for input' do
+			@output = WrapIO.of do
+				expect($stdin).to receive(:gets)
+				Mousevc::Input.prompt
+			end
+			expect(@output).to eq("\n> ")
+		end
+
+		it 'returns the stripped user input' do
+			WrapIO.of(['      q      ']) do
+				@input = Mousevc::Input.prompt
+			end
+			expect(@input).to eq('q')
+		end
+
+		it 'allows choosing the appearance of the prompt' do
+			Mousevc::Input.prompts.store(:dollar, '$')
+			@output = WrapIO.of do
+				Mousevc::Input.prompt(:dollar)
+			end
+			expect(@output).to eq("\n$ ")
+		end
 	end
 
-	describe '#appearance' do
-		it 'represents the default appearance of the prompt'
+	describe '#notice' do
+		it 'sets and gets the notice' do
+			Mousevc::Input.notice = 'Notable notes!'
+			expect(Mousevc::Input.notice).to eq('Notable notes!')
+		end
 	end
 
 	describe '#prompt' do
