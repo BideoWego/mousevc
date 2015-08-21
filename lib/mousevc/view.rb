@@ -25,20 +25,25 @@ module Mousevc
 		##
 		# Renders a view, passing it the given data. In the ERB template the hash variables will be available as instance variables e.g. +@view_variable+
 		#
-		# @note Optionally the view output can be supressed via setting output to +false+. The view will be returned as a string allowing later output e.g. +render('view', {:data => data, false})+
+		# @note If the string passed to the +view+ parameter is an existing file it will be used as the ERB template. Otherwise the string will be parsed as ERB.
+		#
+		# @note Optionally the view output can be supressed via setting output to +false+. The view will be returned as a string allowing later output e.g. +render('view', {:data => data}, false)+
 		#
 		# @note In the event that you want to supress output and not provide any data you may substitute +data+ for +output+ in the parameter list e.g. +render('view', false)+
 		#
 		# @param view [String] the name of the view with +.txt.erb+ omitted
-		# @param data/output [Hash, Boolean] the data to pass to the view, or whether to supress output
-		# @param output [Boolean] false causes the view output to be supressed
-		# @returns [String] the rendered view as a string
+		# @param args [Array] accepts 2 additional parameters.
+		# 	- +data+ [Hash]: the data to pass to the view (optionally omit)
+		# 	- +output+ [Boolean]: false if output is to be supressed
+		#
+		# @return [String] the rendered view as a string
 
 		def render(view, *args)
 			data = args[0].is_a?(Hash) ? args[0] : {}
 			output = true
 			output = false if args[0] == false || args[1] == false
-			view = File.read("#{Dir.pwd}/#{@dir}/#{view}.txt.erb")
+			path = "#{Dir.pwd}/#{@dir}/#{view}.txt.erb"
+			view = File.file?(path) ? File.read(path) : view
 			to_ivars(data)
 			result = ERB.new(view).result(binding)
 			puts result if output
