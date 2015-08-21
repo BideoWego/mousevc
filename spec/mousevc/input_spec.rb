@@ -46,6 +46,15 @@ describe Mousevc::Input do
 		end
 	end
 
+	describe '#prompts' do
+		it 'is read only'
+		it 'defaults to a hash with the default prompt'
+	end
+
+	describe '#appearance' do
+		it 'represents the default appearance of the prompt'
+	end
+
 	describe '#prompt' do
 		it 'prompts the user for input' do
 			@output = WrapIO.of do
