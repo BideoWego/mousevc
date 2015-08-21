@@ -50,13 +50,14 @@ module Mousevc
 
 		def self.clear(*args)
 			if args.empty?
-				@@notice = nil
-				@@data = nil
-				@@prompts = {:default => '>'}
-				@@appearance = nil
-			else
-				args.each {|arg| self.send("#{arg}=".to_sym, nil)}
+				args = [
+					:notice,
+					:data,
+					:prompts,
+					:appearance
+				]
 			end
+			to_defaults(args)
 		end
 
 		##
@@ -69,15 +70,9 @@ module Mousevc
 		# 	- If an appearance is not specified it uses +:default+
 
 		def self.prompt(appearance=nil)
-			if appearance
-				appearance = @@prompts[appearance]
-			elsif @@appearance
-				appearance = @@prompts[@@appearance]
-			else
-				appearance = @@prompts[:default]
-			end
+			appearance = pick(appearance)
 			print "\n#{appearance} "
-			@@data = $stdin.gets.strip
+			@@data = $stdin.gets.to_s.strip
 		end
 
 		##
@@ -149,6 +144,42 @@ module Mousevc
 		def self.clear?
 			['c', 'clear'].include?(@@data)
 		end
+
+		private
+
+			##
+			# Sets class variables to their default values
+			#
+			# @param attributes [Array<Symbol>] array of symbols names for attributes to reset
+
+			def self.to_defaults(attributes)
+				attributes.each do |attribute|
+					case attribute
+					when :prompts
+						@@prompts.clear
+						@@prompts = {:default => '>'}
+					else
+						class_variable_set("@@#{attribute}", nil)
+					end
+				end
+			end
+
+			##
+			# Checks if a specific appearance was passed or set as a default.
+			# Returns that appearance or the default if none was set.
+			#
+			# @return [String] the appearance of the prompt 
+
+			def self.pick(appearance=nil)
+				if appearance
+					appearance = @@prompts[appearance]
+				elsif @@appearance
+					appearance = @@prompts[@@appearance]
+				else
+					appearance = @@prompts[:default]
+				end
+				appearance
+			end
 
 		clear
 	end
