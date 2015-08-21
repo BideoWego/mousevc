@@ -1,3 +1,7 @@
 module Mousevc
-  VERSION = "0.0.2-alpha"
+	
+	##
+	# The current version
+
+	VERSION = "0.0.2-beta"
 end
