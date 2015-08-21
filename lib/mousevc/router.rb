@@ -47,7 +47,7 @@ module Mousevc
 			@controller = options[:controller] ? options[:controller] : 'Controller'
 			@model = options[:model] ? options[:model] : 'Model'
 			@action = options[:action] ? options[:action] : :hello_mousevc
-			@view = View.new(:dir => options[:views])
+			@views = options[:views]
 		end
 
 		##
@@ -60,7 +60,7 @@ module Mousevc
 
 		def route
 			controller = Mousevc.factory(@controller).new(
-				:view => @view,
+				:view => View.new(:dir => @views),
 				:model => Mousevc.factory(@model).new,
 				:router => self
 			)
