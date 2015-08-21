@@ -1,42 +1,5 @@
 require 'spec_helper'
 
-module Mousevc
-	class MyController < Mousevc::Controller
-		@@calls = 0
-
-		def initialize(options={})
-			super(options)
-		end
-
-		def initialization_variables
-			@view.render(@router.controller)
-			@view.render(@router.model)
-			@view.render(@router.action.to_s)
-			@view.render(@view.dir)
-			Input.prompt
-		end
-
-		def loops_until_quits
-			@@calls += 1
-			@view.render(@@calls.to_s)
-			Input.prompt
-		end
-
-		def no_route_if_quit
-			@view.render(Input.data.to_s)
-			Input.prompt
-		end
-
-		def resets_when_desired
-			@view.render(@router.object_id.to_s)
-			Input.prompt
-		end
-	end
-
-	class MyModel < Mousevc::Model
-	end
-end
-
 describe Mousevc::App do
 	it 'passes initialization variables to the router' do
 		@output = WrapIO.of do
@@ -104,17 +67,17 @@ describe Mousevc::App do
 			expect(original_router_id).to_not eq(after_reset_router_id)
 		end
 
-		it 'performs a system clear on each loop' do
-			@output = WrapIO.of do
-				expect(Kernel).to receive(:system).with('clear')
-				@app = Mousevc::App.new
-			end
-			expect(@app.system_clear).to eq(true)
-		end
+		# it 'performs a system clear on each loop' do
+		# 	@output = WrapIO.of do
+		# 		expect(Kernel).to receive(:system).with('clear')
+		# 		@app = Mousevc::App.new
+		# 	end
+		# 	expect(@app.system_clear).to eq(true)
+		# end
 
 		it 'clears the Input class upon exit' do
 			@output = WrapIO.of(['some user input', 'q']) do
-				@app = Mousevc::App.new
+				@app = Mousevc::App.new( :system_clear => false)
 			end
 			expect(Mousevc::Input.data).to eq(nil)
 		end

@@ -1,35 +1,5 @@
 require 'spec_helper'
 
-module Mousevc
-	class MyController < Mousevc::Controller
-		def call_me
-			@view.render('So glad you called!')
-			Input.prompt
-			self
-		end
-
-		def route_to_me
-			@view.render('You routed to me!')
-			Input.prompt
-		end
-
-		def route_from_me
-			@router.action = :route_to_me
-			self
-		end
-	end
-
-	class DifferentController < Mousevc::Controller
-		def call_me_instead
-			@view.render('Can we be friends?')
-			Input.prompt
-		end
-	end
-
-	class MyModel < Mousevc::Model
-	end
-end
-
 describe Mousevc::Controller do
 	before do
 		@output = WrapIO.of do
