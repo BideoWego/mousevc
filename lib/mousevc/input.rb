@@ -16,6 +16,34 @@ module Mousevc
 		@@data = nil
 
 		##
+		# @!attribute prompts [r]
+		# @return [Hash] a hash of prompts available for use in +Input.prompt+
+
+		@@prompts = {:default => '>'}
+
+		##
+		# @!attribute appearance
+		# @return [Symbol] the symbol name of the prompt appearance to use from +Input.prompts+
+
+		@@appearance = nil
+
+		##
+		# @return [Symbol] the symbol name of the current prompt appearance
+
+		def self.appearance
+			@@appearance
+		end
+
+		##
+		# Set the default appearance for the prompt
+		#
+		# @param value [Symbol] the symbol name of the appearance to use from +Input.prompts+
+
+		def self.appearance=(value)
+			@@appearance = value
+		end
+
+		##
 		# Clears all or a list of class variables by setting them to +nil+.
 		#
 		# @param args [Symbol] a symbol list of class variables to clear
@@ -24,6 +52,8 @@ module Mousevc
 			if args.empty?
 				@@notice = nil
 				@@data = nil
+				@@prompts = {:default => '>'}
+				@@appearance = nil
 			else
 				args.each {|arg| self.send("#{arg}=".to_sym, nil)}
 			end
@@ -32,12 +62,29 @@ module Mousevc
 		##
 		# @note Calling this method will stop all execution until the user submits input
 		#
-		# Prompts the user for input using +gets.chomp+
+		# Prompts the user for input using +gets.strip+
 		# Once input is submitted it will be available via +Input.data+
+		#
+		# @param appearance [Symbol] the symbol name of the prompt the use from +Input.prompts+
+		# 	- If an appearance is not specified it uses +:default+
 
-		def self.prompt
-			print "\n> "
-			@@data = gets.chomp
+		def self.prompt(appearance=nil)
+			if appearance
+				appearance = @@prompts[appearance]
+			elsif @@appearance
+				appearance = @@prompts[@@appearance]
+			else
+				appearance = @@prompts[:default]
+			end
+			print "\n#{appearance} "
+			@@data = $stdin.gets.strip
+		end
+
+		##
+		# @return [Hash] a hash of the currently available prompt appearances
+
+		def self.prompts
+			@@prompts
 		end
 
 		##
