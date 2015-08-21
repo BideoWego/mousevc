@@ -13,6 +13,16 @@ module Mousevc
 	class App
 
 		##
+		# @!attribute system_clear
+		#
+		# Setting this to false will disable calls to +system('clear')+
+		# at the start of each application loop.
+		#
+		# @return [Boolean] whether or not to perform system clear
+
+		attr_accessor :system_clear
+
+		##
 		# Creates a new +Mousevc::App+ instance
 		# 
 		# @param options [Hash] expects the following keys:
@@ -26,8 +36,18 @@ module Mousevc
 			@model = options[:model]
 			@action = options[:action]
 			@views = options[:views]
+			@system_clear = options[:system_clear].nil? ? true : options[:system_clear]
 			reset
 			listen
+		end
+
+		##
+		# Returns true if +@system_clear+ is true
+		#
+		# @return [Boolean] whether or not system clearing is enabled
+
+		def system_clear?
+			@system_clear
 		end
 
 		private
@@ -55,10 +75,10 @@ module Mousevc
 
 			def listen
 				begin
-					system('clear')
-					@router.route if ! Input.quit?
+					system('clear') if system_clear?
+					@router.route unless Input.quit?
 					reset if Input.reset?
-				end while ! Input.quit?
+				end until Input.quit?
 				Input.clear
 			end
 	end
