@@ -11,4 +11,10 @@ describe Mousevc do
 			expect(art).to be_a(String)
 		end
 	end
+
+	describe '#factory' do
+		it 'returns a the Mousevc class constant of the specified class' do
+			expect(Mousevc.factory('Controller')).to eq(Mousevc::Controller)
+		end
+	end
 end

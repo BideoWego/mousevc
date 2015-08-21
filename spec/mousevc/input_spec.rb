@@ -6,9 +6,19 @@ describe Mousevc::Input do
 		it 'clears specific class variables from a symbol list'
 	end
 
+	describe '#prompts' do
+		it 'is read only'
+		it 'defaults to a hash with the default prompt'
+	end
+
+	describe '#appearance' do
+		it 'represents the default appearance of the prompt'
+	end
+
 	describe '#prompt' do
 		it 'prompts the user for input'
-		it 'returns the chomped user input'
+		it 'returns the stripped user input'
+		it 'allows choosing the appearance of the prompt'
 	end
 
 	describe '#notice' do
