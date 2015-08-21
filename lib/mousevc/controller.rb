@@ -44,6 +44,10 @@ module Mousevc
 		end
 
 		private
+
+			##
+			# Outputs the default Mousevc welcome
+
 			def hello_mousevc
 				puts Mousevc.art
 				Input.prompt
