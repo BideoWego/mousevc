@@ -75,7 +75,7 @@ module Mousevc
 
 			def listen
 				begin
-					system('clear') if system_clear?
+					Kernel.system('clear') if system_clear?
 					@router.route unless Input.quit?
 					reset if Input.reset?
 				end until Input.quit?
