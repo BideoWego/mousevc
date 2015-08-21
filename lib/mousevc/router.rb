@@ -44,7 +44,7 @@ module Mousevc
 		# 	- :views => relative path to views directory
 
 		def initialize(options={})
-			@controller = options[:controller] ? options[:controller] : 'Controller' 
+			@controller = options[:controller] ? options[:controller] : 'Controller'
 			@model = options[:model] ? options[:model] : 'Model'
 			@action = options[:action] ? options[:action] : :hello_mousevc
 			@view = View.new(:dir => options[:views])
@@ -59,9 +59,9 @@ module Mousevc
 		# 1. sending the controller the current action in +@action+
 
 		def route
-			controller = Object.const_get(@controller).new(
+			controller = Mousevc.factory(@controller).new(
 				:view => @view,
-				:model => Object.const_get(@model).new,
+				:model => Mousevc.factory(@model).new,
 				:router => self
 			)
 			controller.send(@action)
