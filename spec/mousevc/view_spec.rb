@@ -11,5 +11,6 @@ describe Mousevc::View do
 		it 'passes the view data as instance variables'
 		it 'allows the view to be returned as a string'
 		it 'allows argument substitution for the data and supress output parameters'
+		it 'renders an erb template from a string'
 	end
 end

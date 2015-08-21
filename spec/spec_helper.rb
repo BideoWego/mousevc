@@ -1,48 +1,52 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-require 'mousevc'
+require_relative '../lib/mousevc.rb'
+
 
 module Helpers
-	def fake_stdin(text)
-		begin
-			$stdin = StringIO.new
-			$stdin.puts(text)
-			$stdin.rewind
-			yield
-		ensure
-			$stdin = STDIN
+	class Fake
+		@debug = false
+
+		def initialize(strings)
+			@strings = strings
+		end
+
+		def gets
+			next_string = @strings.shift
+			puts "(DEBUG) Faking #gets with: #{next_string}" if @debug
+			next_string
+		end
+
+		def self.input(strings)
+			begin
+				$stdin = new(strings)
+				yield
+			ensure
+				$stdin = STDIN
+			end
 		end
 	end
 
-	def capture_stdout(&block)
-		original_stdout = $stdout
-		$stdout = fake = StringIO.new
-	begin
-		yield
-	ensure
-		$stdout = original_stdout
+	class Capture
+		def self.output
+			$stdout = captor = StringIO.new
+			begin
+				yield
+			ensure
+				$stdout = STDOUT
+			end
+			captor.string
+		end
 	end
-		fake.string
+
+	class WrapIO
+		def self.of(input=['q'])
+			Capture.output do 
+				Fake.input(input) do
+					yield
+				end
+			end
+		end
 	end
 end
 
-RSpec.configure do |conf|
-	conf.include(Helpers)
-end
-
-class MyController < Mousevc::Controller
-	def index
-	end
-end
-
-class MyModel < Mousevc::Model
-	def data
-		"Hello Model!"
-	end
-end
-
-class MyValidation < Mousevc::Validation
-	def valid?(value)
-		@error = "Error!" unless value
-		value
-	end
-end
+include Helpers
