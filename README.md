@@ -10,6 +10,10 @@
 
 A tiny mouse sized MVC framework to jump start command line apps. Written in Ruby.
 
+[![Gem Version](https://badge.fury.io/rb/mousevc.svg)](http://badge.fury.io/rb/mousevc)
+
+[View the documentation](http://www.rubydoc.info/gems/mousevc)
+
 ## Installation
 
 Add this line to your application's Gemfile:
