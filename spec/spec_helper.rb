@@ -98,6 +98,10 @@ module Mousevc
 			@router.action = :route_to_me
 			self
 		end
+
+		def self.calls
+			@@calls
+		end
 	end
 
 	class DifferentController < Mousevc::Controller
