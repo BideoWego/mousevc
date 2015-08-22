@@ -41,14 +41,14 @@ $ gem install mousevc
 1. Create a view in your views directory
 
 	```erb
-	# <%# views/show_cheese.txt.erb %>
+	<%# views/show_cheese.txt.erb %>
 
-	# Hello Mousevc!
-	# I like <%= @cheese %>!
-	# What kind of cheese do you like?
+	Hello Mousevc!
+	I like <%= @cheese %>!
+	What kind of cheese do you like?
 	```
 
-	- or just use a string!
+	1. Or just use a string!
 
 	```ruby
 	view = %Q{<%# views/show_cheese.txt.erb %>\nHello Mousevc!\nI like <%= @cheese %>!\nWhat kind of cheese do you like?}
