@@ -27,14 +27,14 @@ module Mousevc
 		#
 		# @note If the string passed to the +view+ parameter is an existing file it will be used as the ERB template. Otherwise the string will be parsed as ERB.
 		#
-		# @note Optionally the view output can be supressed via setting output to +false+. The view will be returned as a string allowing later output e.g. +render('view', {:data => data}, false)+
+		# @note Optionally the view output can be suppressed via setting output to +false+. The view will be returned as a string allowing later output e.g. +render('view', {:data => data}, false)+
 		#
-		# @note In the event that you want to supress output and not provide any data you may substitute +data+ for +output+ in the parameter list e.g. +render('view', false)+
+		# @note In the event that you want to suppress output and not provide any data you may substitute +data+ for +output+ in the parameter list e.g. +render('view', false)+
 		#
 		# @param view [String] the name of the view with +.txt.erb+ omitted
 		# @param args [Array] accepts 2 additional parameters.
-		# 	- +data+ [Hash]: the data to pass to the view (optionally omit)
-		# 	- +output+ [Boolean]: false if output is to be supressed
+		# 	- +data+ [Hash] the data to pass to the view (optionally omit)
+		# 	- +output+ [Boolean] false if output is to be suppressed
 		#
 		# @return [String] the rendered view as a string
 

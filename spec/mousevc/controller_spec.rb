@@ -2,16 +2,12 @@ require 'spec_helper'
 
 describe Mousevc::Controller do
 	before do
-		@output = WrapIO.of do
-			@app = Mousevc::App.new(
-				:controller => 'MyController',
-				:action => :call_me,
-				:system_clear => false
-			)
-		end
-		WrapIO.of do
-			@router = @app.send(:reset)
-		end
+		@app = Mousevc::App.new(
+			:controller => 'MyController',
+			:action => :call_me,
+			:looping => true
+		)
+		@router = @app.send(:reset)
 		WrapIO.of do
 			@controller = @router.route
 		end

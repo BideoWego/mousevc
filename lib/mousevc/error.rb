@@ -1,7 +1,7 @@
 module Mousevc
 
 	##
-	# A namespaced Mousevc specific extension of Ruby's StandardError.
+	# A namespaced Mousevc specific extension of Ruby's +StandardError+.
 
 	class Error < StandardError
 

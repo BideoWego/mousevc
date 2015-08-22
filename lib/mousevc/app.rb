@@ -1,21 +1,21 @@
 require_relative 'router.rb'
 require_relative 'input.rb'
 require_relative 'error.rb'
+require_relative 'persistence.rb'
 
 module Mousevc
 
-	##
+	## true
 	# The top level class of Mousevc.
 	# The container for all of the objects
 	# created within a Mousevc application.
-	# 
 
 	class App
 
 		##
 		# @!attribute system_clear
 		#
-		# Setting this to false will disable calls to +system('clear')+
+		# Setting this to +false+ will disable calls to +system('clear')+
 		# at the start of each application loop.
 		#
 		# @return [Boolean] whether or not to perform system clear
@@ -23,31 +23,56 @@ module Mousevc
 		attr_accessor :system_clear
 
 		##
+		# @!attribute looping
+		#
+		# Set this to +true+ if you want the application to loop, defaults to +false+
+		#
+		# @return [Boolean] whether or not the application should loop
+
+		attr_accessor :looping
+
+		##
 		# Creates a new +Mousevc::App+ instance
 		# 
 		# @param options [Hash] expects the following keys:
-		# 	- :controller => string name of default controller class
-		# 	- :model => string name of default model class
-		# 	- :action => method to call on default controller
-		# 	- :views => relative path to views directory
+		# 	- :controller => [String] name of default controller class
+		# 	- :model => [String] name of default model class
+		# 	- :action => [Symbol] method to call on default controller
+		# 	- :views => [String] relative path to views directory
+		# 	- :looping => [Boolean] +true+ if the application should loop, defaults to +false+
+		# 	- :system_clear => [Boolean] +true+ if output should be cleared on update, defaults to +false+
 
 		def initialize(options={})
 			@controller = options[:controller]
 			@model = options[:model]
 			@action = options[:action]
 			@views = options[:views]
-			@system_clear = options[:system_clear].nil? ? true : options[:system_clear]
-			reset
-			listen
+			@looping = options[:looping].nil? ? false : options[:looping]
+			@system_clear = options[:system_clear].nil? ? false : options[:system_clear]
 		end
 
 		##
-		# Returns true if +@system_clear+ is true
+		# Run the application
+
+		def run
+			reset
+			@looping ? listen : single
+		end
+
+		##
+		# Returns +true+ if +@system_clear+ is true
 		#
 		# @return [Boolean] whether or not system clearing is enabled
 
 		def system_clear?
 			@system_clear
+		end
+
+		##
+		# Returns +true+ if +@looping+ is set to +true+
+
+		def looping?
+			@looping
 		end
 
 		private
@@ -65,6 +90,12 @@ module Mousevc
 				)
 			end
 
+			def single
+				Kernel.system('clear') if system_clear?
+				@router.route unless Input.quit?
+				reset if Input.reset?
+			end
+
 			##
 			# Runs the application loop.
 			# Clears the system view each iteration.
@@ -75,9 +106,7 @@ module Mousevc
 
 			def listen
 				begin
-					Kernel.system('clear') if system_clear?
-					@router.route unless Input.quit?
-					reset if Input.reset?
+					single
 				end until Input.quit?
 				Input.clear
 			end

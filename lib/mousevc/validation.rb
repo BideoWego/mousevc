@@ -17,7 +17,8 @@ module Mousevc
 
 		attr_accessor :error
 
-		##Returns +true+ True if the string containers only uppercase or lowercase letters
+		##
+		# Returns +true+ if the string containers only uppercase or lowercase letters
 		#
 		# @param value [String] the value
 		# @return [Boolean]
@@ -30,7 +31,8 @@ module Mousevc
 			is_alpha
 		end
 
-		##Returns +true+ True if the value is equal to the other
+		##
+		# Returns +true+ if the value is equal to the other
 		#
 		# @param value [Any] the value
 		# @param other [Any] the other value
@@ -44,7 +46,8 @@ module Mousevc
 			is_match
 		end
 
-		##Returns +true+ True if the value is not equal to the other
+		##
+		# Returns +true+ if the value is not equal to the other
 		#
 		# @param value [Any] the value
 		# @param other [Any] the other value
@@ -58,7 +61,8 @@ module Mousevc
 			is_different
 		end
 
-		##Returns +true+ True if the value has at least the specified length
+		##
+		# Returns +true+ if the value has at least the specified length
 		#
 		# @param value [String] the value
 		# @param length [Integer] the length
@@ -72,7 +76,8 @@ module Mousevc
 			has_min_length
 		end
 
-		##Returns +true+ True if the value has at most the specified length
+		##
+		# Returns +true+ if the value has at most the specified length
 		#
 		# @param value [String] the value
 		# @param length [Integer] the length
@@ -86,7 +91,8 @@ module Mousevc
 			has_max_length
 		end
 
-		##Returns +true+ True if the value has exactly the specified length
+		##
+		# Returns +true+ if the value has exactly the specified length
 		#
 		# @param value [String] the value
 		# @param length [Integer] the length
@@ -164,7 +170,8 @@ module Mousevc
 			is_less_eq
 		end
 
-		##Returns +true+ True if the value is an integer or a decimal, includes positive and negative
+		##
+		# Returns +true+ if the value is an integer or a decimal, includes positive and negative
 		#
 		# @param value [String] the value
 		# @return [Boolean]
@@ -177,7 +184,8 @@ module Mousevc
 			is_numeric
 		end
 
-		##Returns +true+ True if the value is an integer, includes positive and negative
+		##
+		# Returns +true+ if the value is an integer, includes positive and negative
 		#
 		# @param value [String] the value
 		# @return [Boolean]
@@ -190,7 +198,8 @@ module Mousevc
 			is_integer
 		end
 
-		##Returns +true+ True if the value is an decimal, includes positive and negative
+		##
+		# Returns +true+ if the value is an decimal, includes positive and negative
 		#
 		# @param value [String] the value
 		# @return [Boolean]
@@ -203,7 +212,8 @@ module Mousevc
 			is_decimal
 		end
 
-		##Returns +true+ True if the value is a positive integer
+		##
+		# Returns +true+ if the value is a positive integer
 		#
 		# @param value [String] the value
 		# @return [Boolean]
@@ -216,7 +226,8 @@ module Mousevc
 			is_natural
 		end
 
-		##Returns +true+ True if the value is a positive integer greater than 0
+		##
+		# Returns +true+ if the value is a positive integer greater than zero
 		#
 		# @param value [String] the value
 		# @return [Boolean]
@@ -229,7 +240,8 @@ module Mousevc
 			is_natural_no_zero
 		end
 
-		##Returns +true+ True if the value is a valid url and accounts for many edge cases
+		##
+		# Returns +true+ if the value is a valid url and accounts for many edge cases
 		#
 		# @param value [String] the value
 		# @return [Boolean]
@@ -242,7 +254,8 @@ module Mousevc
 			is_url
 		end
 
-		##Returns +true+ True if the value is a valid email address
+		##
+		# Returns +true+ if the value is a valid email address
 		#
 		# @note This method is more a validation that the value is probably an email. The best way to confirm an email is to require the user to enter it twice, compare them, and ultimately send them an email!
 		#
@@ -257,7 +270,8 @@ module Mousevc
 			is_email
 		end
 
-		##Returns +true+ True if the value is a valid IP address
+		##
+		# Returns +true+ if the value is a valid IP address i.e. between 0.0.0.0 and 255.255.255.255
 		#
 		# @param value [String] the value
 		# @return [Boolean]

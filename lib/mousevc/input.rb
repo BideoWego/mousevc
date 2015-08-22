@@ -8,11 +8,13 @@ module Mousevc
 		##
 		# @!attribute notice
 		# @return [String] the notice message
+
 		@@notice = nil
 
 		##
 		# @!attribute data [r]
 		# @return [String] the user input data retrieved via +Input.prompt+
+
 		@@data = nil
 
 		##
@@ -44,7 +46,7 @@ module Mousevc
 		end
 
 		##
-		# Clears all or a list of class variables by setting them to +nil+.
+		# Clears all or a list of class variables by setting them to +nil+
 		#
 		# @param args [Symbol] a symbol list of class variables to clear
 
