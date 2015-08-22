@@ -32,64 +32,88 @@ $ gem install mousevc
 
 ## Usage
 
-1. Create a class that extends `Mousevc::App`
+1. Require Mousevc
 
-```ruby
-# jerry.rb
-
-require 'mousevc'
-
-class Jerry < Mousevc::App
-end
-
-Jerry.new(
-	:controller => 'JerryController',
-	:model => 'JerryModel',
-	:action => :find_cheese,
-	:views => 'relative/views/directory/path'
-)
-```
-
-1. Create your default controller
-
-```ruby
-# jerry_controller.rb
-
-class JerryController < Mousevc::Controller
-	def find_cheese
-		cheese = @model.cheese
-		@view.render('show_cheese', :cheese => cheese)
-	end
-end
-```
-
-1. Create the corresponding model
-
-```ruby
-# jerry_model.rb
-
-class JerryModel < Mousevc::Model
-	def cheese
-		@cheese = "Swiss cheese"
-	end
-end
-```
+	```ruby
+	require 'mousevc'
+	```
 
 1. Create a view in your views directory
 
-```erb
-<%# views/show_cheese.txt.erb %>
+	```erb
+	# <%# views/show_cheese.txt.erb %>
 
-Hello Mousevc!
+	# Hello Mousevc!
+	# I like <%= @cheese %>!
+	# What kind of cheese do you like?
+	```
 
-I like <%= @cheese %>!
-```
+	- or just use a string!
+
+	```ruby
+	view = %Q{<%# views/show_cheese.txt.erb %>\nHello Mousevc!\nI like <%= @cheese %>!\nWhat kind of cheese do you like?}
+	```
+
+1. Create your default controller
+
+	```ruby
+	# jerry_controller.rb
+
+	class JerryController < Mousevc::Controller
+		def find_cheese
+			view = %Q{<%# views/show_cheese.txt.erb %>\nHello Mousevc!\nI like <%= @cheese %>!\nWhat kind of cheese do you like?}
+			cheese = @model.cheese
+			@view.render(view, :cheese => cheese)
+			Mousevc::Input.prompt
+		end
+	end
+	```
+
+1. Create the corresponding model
+
+	```ruby
+	# jerry_model.rb
+
+	class JerryModel < Mousevc::Model
+		def cheese
+			@cheese = "Swiss cheese"
+		end
+	end
+	```
+
+1. Create a class that extends `Mousevc::App`
+
+	```ruby
+
+	# jerry.rb
+
+	class Jerry < Mousevc::App
+	end
+
+	Jerry.new(
+		:controller => 'JerryController',
+		:model => 'JerryModel',
+		:action => :find_cheese,
+		:views => 'relative/views/directory/path'
+	).run
+	```
 
 1. Run mouse run!
 
-```console
-$ ruby jerry.rb
-```
+	```shell
+	# $ ruby jerry.rb
+	```
+
+1. Enjoy the view!
+
+	```shell
+
+	Hello Mousevc!
+	I like Swiss cheese!
+	What kind of cheese do you like?
+
+	> 
+	```
 
 ## Development
 
