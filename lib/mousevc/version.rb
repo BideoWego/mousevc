@@ -3,5 +3,5 @@ module Mousevc
 	##
 	# The current version
 
-	VERSION = "0.0.2-beta"
+	VERSION = "0.0.2-rc"
 end
