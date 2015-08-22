@@ -21,8 +21,9 @@ module Mousevc
 		# @!attribute model
 		#
 		# @note Set this variable to the string name of the model class to be instantiated upon the next application loop
+		# @note Can be used to retrieve a model from the +Mousevc::Persistence+ class when set to a symbol.
 		#
-		# @return [String] the instance of the current model.
+		# @return [String, Symbol] the instance of the current model.
 		
 		attr_accessor :model
 
@@ -55,27 +56,22 @@ module Mousevc
 		#
 		# 1. creating an instance of the current controller in the +@controller+ attribute
 		# 1. creating an instance of the current model in the +@model+ attribute
-		# 1. passing that controller in model instance, a view instance, and an instance of +self+
+		# 1. creating a new or finding the desired model
+		# 1. passing that controller that model instance, a view instance, and an instance of +self+
 		# 1. sending the controller the current action in +@action+
 
 		def route
-			@persistance = Mousevc.factory(@controller).new(
-				:view => View.new(:dir => @views),
-				:model => Mousevc.factory(@model).new,
+			model = nil
+			model = Persistence.get(@model) if @model.is_a?(Symbol)
+			model = Persistence.get(@controller.to_sym) unless Persistence.get(@controller.to_sym).nil?
+			model = Mousevc.factory(@model).new unless model
+			view = View.new(:dir => @views)
+			controller = Mousevc.factory(@controller).new(
+				:view => view,
+				:model => model,
 				:router => self
-			) if create_controller?
-			@persistance.send(@action)
+			)
+			controller.send(@action)
 		end
-
-		private
-
-			##
-			# Returns true if the router should create a new controller instance
-
-			def create_controller?
-				should_create = true
-				should_create = false if @persistance
-				should_create
-			end
 	end
 end

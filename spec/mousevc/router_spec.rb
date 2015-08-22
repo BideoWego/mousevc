@@ -5,8 +5,7 @@ describe Mousevc::Router do
 		WrapIO.of do
 			@app = Mousevc::App.new(
 				:controller => 'MyController',
-				:action => :call_me,
-				:system_clear => false
+				:action => :call_me
 			)
 		end
 		WrapIO.of do
@@ -14,6 +13,7 @@ describe Mousevc::Router do
 			@controller = @router.route
 		end
 	end
+
 	describe '#controller' do
 		it 'is the string name of the current controller' do
 			expect(@router.controller).to eq('MyController')
@@ -51,6 +51,16 @@ describe Mousevc::Router do
 		it 'sends the current controller an instance of the current model' do
 			expect(@controller.model).to_not eq(nil)
 			expect(@controller.model.class).to eq(Mousevc::Model)
+		end
+
+		it 'sends the current controller a persisted model' do
+			WrapIO.of do
+				@model = Mousevc::Model.new
+				Mousevc::Persistence.set(:my_model, @model)
+				@router.model = :my_model
+				@controller = @router.route
+			end
+			expect(@controller.model.object_id).to eq(@model.object_id)
 		end
 	end
 end

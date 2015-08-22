@@ -1,6 +1,7 @@
 require_relative 'router.rb'
 require_relative 'input.rb'
 require_relative 'error.rb'
+require_relative 'persistence.rb'
 
 module Mousevc
 
