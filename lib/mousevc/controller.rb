@@ -10,7 +10,7 @@ module Mousevc
 		##
 		# @!attribute model
 		#
-		# An instance of the Mousevc::Model class.
+		# An instance of the +Mousevc::Model+ class.
 		# This will be an instance of the model class passed to the application during initialization.
 		# It is also possible to change this via +@router.model+
 		#
@@ -21,7 +21,7 @@ module Mousevc
 		##
 		# @!attribute view [r]
 		#
-		# An instance of the Mousevc::View class
+		# An instance of the +Mousevc::View+ class
 		#
 		# @return [Mousevc::View] the view instance
 
@@ -30,12 +30,12 @@ module Mousevc
 		##
 		# Creates a new +Mousevc::Controller+ instance
 		#
-		# @note Controllers should not be instantiated directly. Pass the name of the controller you wish you instantiate to the router via +@router.controller+ along with a model and action. This allows the router to do the work for you on the next application loop.
+		# @note Controllers should not be instantiated directly. Pass the name of the controller you wish you instantiate to the router via +@router.controller+ along with a model and action. This allows the router to do the work for you on the next application execution or loop.
 		#
 		# @param options [Hash] expects the following keys:
-		# 	- :model => a reference to the controller's model instance
-		# 	- :view => a reference to the view instance
-		# 	- :router => a reference to the router instance
+		# 	- :model => [Mousevc::Model] a reference to the controller's model instance
+		# 	- :view => [Mousevc::View] a reference to the view instance
+		# 	- :router => [Mousevc::Router] a reference to the router instance
 
 		def initialize(options={})
 			@model = options[:model]

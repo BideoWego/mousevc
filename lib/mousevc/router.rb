@@ -38,10 +38,10 @@ module Mousevc
 		# Creates a new +Mousevc::Router+ instance
 		#
 		# @param options [Hash] expects the following keys:
-		# 	- :controller => string name of default controller class
-		# 	- :model => string name of default model class
-		# 	- :action => method to call on default controller
-		# 	- :views => relative path to views directory
+		# 	- :controller => [String] name of default controller class
+		# 	- :model => [String] name of default model class
+		# 	- :action => [Symbol] method to call on default controller
+		# 	- :views => [String] relative path to views directory
 
 		def initialize(options={})
 			@controller = options[:controller] ? options[:controller] : 'Controller'
@@ -59,12 +59,23 @@ module Mousevc
 		# 1. sending the controller the current action in +@action+
 
 		def route
-			controller = Mousevc.factory(@controller).new(
+			@persistance = Mousevc.factory(@controller).new(
 				:view => View.new(:dir => @views),
 				:model => Mousevc.factory(@model).new,
 				:router => self
-			)
-			controller.send(@action)
+			) if create_controller?
+			@persistance.send(@action)
 		end
+
+		private
+
+			##
+			# Returns true if the router should create a new controller instance
+
+			def create_controller?
+				should_create = true
+				should_create = false if @persistance
+				should_create
+			end
 	end
 end

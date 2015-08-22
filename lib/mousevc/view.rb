@@ -33,8 +33,8 @@ module Mousevc
 		#
 		# @param view [String] the name of the view with +.txt.erb+ omitted
 		# @param args [Array] accepts 2 additional parameters.
-		# 	- +data+ [Hash]: the data to pass to the view (optionally omit)
-		# 	- +output+ [Boolean]: false if output is to be supressed
+		# 	- +data+ [Hash] the data to pass to the view (optionally omit)
+		# 	- +output+ [Boolean] false if output is to be supressed
 		#
 		# @return [String] the rendered view as a string
 

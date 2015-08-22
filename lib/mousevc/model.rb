@@ -4,7 +4,8 @@ module Mousevc
 
 	##
 	# The base model class for a Mousevc application.
-	# Provides basic functionality for validating input before modifying data.
+	# Provides access to basic functionality for validating input before modifying data
+	# via it's +@validation+ attribute, an instance of the +Mousevc::Validation+ class.
 
 	class Model
 
@@ -18,7 +19,7 @@ module Mousevc
 		# Creates a new +Mousevc::Model+ instance
 		#
 		# @param options [Hash] optionally accepts the following keys:
-		# 	- :validation => an instance of the +Mousevc::Validation+ class
+		# 	- :validation => [Mousevc::Router] an instance of the +Mousevc::Validation+ class
 
 		def initialize(options={})
 			@validation = options[:validation] ? options[:validation] : Validation.new
