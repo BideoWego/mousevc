@@ -17,8 +17,7 @@ module Mousevc
 
 		attr_accessor :error
 
-		##
-		# True if the string containers only uppercase or lowercase letters
+		##Returns +true+ True if the string containers only uppercase or lowercase letters
 		#
 		# @param value [String] the value
 		# @return [Boolean]
@@ -31,8 +30,7 @@ module Mousevc
 			is_alpha
 		end
 
-		##
-		# True if the value is equal to the other
+		##Returns +true+ True if the value is equal to the other
 		#
 		# @param value [Any] the value
 		# @param other [Any] the other value
@@ -46,8 +44,7 @@ module Mousevc
 			is_match
 		end
 
-		##
-		# True if the value is not equal to the other
+		##Returns +true+ True if the value is not equal to the other
 		#
 		# @param value [Any] the value
 		# @param other [Any] the other value
@@ -61,8 +58,7 @@ module Mousevc
 			is_different
 		end
 
-		##
-		# True if the value has at least the specified length
+		##Returns +true+ True if the value has at least the specified length
 		#
 		# @param value [String] the value
 		# @param length [Integer] the length
@@ -76,8 +72,7 @@ module Mousevc
 			has_min_length
 		end
 
-		##
-		# True if the value has at most the specified length
+		##Returns +true+ True if the value has at most the specified length
 		#
 		# @param value [String] the value
 		# @param length [Integer] the length
@@ -91,8 +86,7 @@ module Mousevc
 			has_max_length
 		end
 
-		##
-		# True if the value has exactly the specified length
+		##Returns +true+ True if the value has exactly the specified length
 		#
 		# @param value [String] the value
 		# @param length [Integer] the length
@@ -107,7 +101,7 @@ module Mousevc
 		end
 
 		##
-		# True if the value is greater than the other given value
+		# Returns +true+ if the value is greater than the other given value
 		# @note This method does note covert strings to numbers
 		#
 		# @param value [Mixed] the value
@@ -123,7 +117,7 @@ module Mousevc
 		end
 
 		##
-		# True if the value is greater than or equal to the other given value
+		# Returns +true+ if the value is greater than or equal to the other given value
 		# @note This method does note covert strings to numbers
 		#
 		# @param value [Mixed] the value
@@ -139,7 +133,7 @@ module Mousevc
 		end
 
 		##
-		# True if the value is less than the other given value
+		# Returns +true+ if the value is less than the other given value
 		# @note This method does note covert strings to numbers
 		#
 		# @param value [Mixed] the value
@@ -155,7 +149,7 @@ module Mousevc
 		end
 
 		##
-		# True if the value is less than or equal to the other given value
+		# Returns +true+ if the value is less than or equal to the other given value
 		# @note This method does note covert strings to numbers
 		#
 		# @param value [Mixed] the value
@@ -170,8 +164,7 @@ module Mousevc
 			is_less_eq
 		end
 
-		##
-		# True if the value is an integer or a decimal, includes positive and negative
+		##Returns +true+ True if the value is an integer or a decimal, includes positive and negative
 		#
 		# @param value [String] the value
 		# @return [Boolean]
@@ -184,8 +177,7 @@ module Mousevc
 			is_numeric
 		end
 
-		##
-		# True if the value is an integer, includes positive and negative
+		##Returns +true+ True if the value is an integer, includes positive and negative
 		#
 		# @param value [String] the value
 		# @return [Boolean]
@@ -198,8 +190,7 @@ module Mousevc
 			is_integer
 		end
 
-		##
-		# True if the value is an decimal, includes positive and negative
+		##Returns +true+ True if the value is an decimal, includes positive and negative
 		#
 		# @param value [String] the value
 		# @return [Boolean]
@@ -212,8 +203,7 @@ module Mousevc
 			is_decimal
 		end
 
-		##
-		# True if the value is a positive integer
+		##Returns +true+ True if the value is a positive integer
 		#
 		# @param value [String] the value
 		# @return [Boolean]
@@ -226,8 +216,7 @@ module Mousevc
 			is_natural
 		end
 
-		##
-		# True if the value is a positive integer greater than 0
+		##Returns +true+ True if the value is a positive integer greater than 0
 		#
 		# @param value [String] the value
 		# @return [Boolean]
@@ -240,8 +229,7 @@ module Mousevc
 			is_natural_no_zero
 		end
 
-		##
-		# True if the value is a valid url and accounts for many edge cases
+		##Returns +true+ True if the value is a valid url and accounts for many edge cases
 		#
 		# @param value [String] the value
 		# @return [Boolean]
@@ -254,8 +242,7 @@ module Mousevc
 			is_url
 		end
 
-		##
-		# True if the value is a valid email address
+		##Returns +true+ True if the value is a valid email address
 		#
 		# @note This method is more a validation that the value is probably an email. The best way to confirm an email is to require the user to enter it twice, compare them, and ultimately send them an email!
 		#
@@ -270,8 +257,7 @@ module Mousevc
 			is_email
 		end
 
-		##
-		# True if the value is a valid IP address
+		##Returns +true+ True if the value is a valid IP address
 		#
 		# @param value [String] the value
 		# @return [Boolean]
@@ -285,7 +271,7 @@ module Mousevc
 		end
 
 		##
-		# True if the value contains only letters, numbers
+		# Returns +true+ if the value contains only letters, numbers
 		# and has a length between the min and max of the given range
 		#
 		# @param value [String] the value
@@ -301,7 +287,7 @@ module Mousevc
 		end
 
 		##
-		# True if the value contains only letters, numbers and has a length,
+		# Returns +true+ if the value contains only letters, numbers and has a length,
 		# has a length between the min and max of the given range,
 		# and contains at least one uppercase letter
 		#
@@ -318,7 +304,7 @@ module Mousevc
 		end
 
 		##
-		# True if the value contains only letters, numbers and has a length,
+		# Returns +true+ if the value contains only letters, numbers and has a length,
 		# has a length between the min and max of the given range,
 		# contains at least one uppercase letter,
 		# and contains at least one symbol
