@@ -24,11 +24,13 @@ module Mousevc
 			"",
 			"by",
 			"Bideo Wego",
-			"",
 			"http://bideowego.com",
-			""
+			"",
+			"Documentation",
+			"http://www.rubydoc.info/gems/mousevc"
 		]
 		width = lines.max.length
+		width = width.even? ? width + 1 : width
 		lines.map do |s|
 			s.center(width)
 		end.join("\n")
