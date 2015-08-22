@@ -101,7 +101,7 @@ $ gem install mousevc
 1. Run mouse run!
 
 	```shell
-	# $ ruby jerry.rb
+	$ ruby jerry.rb
 	```
 
 1. Enjoy the view!
