@@ -1,16 +1,54 @@
 require 'spec_helper'
 
 describe Mousevc::View do
+	before do
+		@view = Mousevc::View.new(:dir => 'spec/mousevc/views')
+	end
+
 	describe '#dir' do
-		it 'is the string path to the view directory'
-		it 'is read only'
+		it 'is the string path to the view directory' do
+			expect(@view.dir).to eq('spec/mousevc/views')
+		end
+
+		it 'is read only' do
+			expect {@view.dir = nil}.to raise_error(NoMethodError)
+		end
 	end
 
 	describe '#render' do
-		it 'renders the given view'
-		it 'passes the view data as instance variables'
-		it 'allows the view to be returned as a string'
-		it 'allows argument substitution for the data and supress output parameters'
-		it 'renders an erb template from a string'
+		it 'renders the given view from file' do
+			@output = WrapIO.of do
+				@view.render('test', :test => 'Testing...')
+			end
+			expect(@output).to eq("Hello View!\nTesting...\n")
+		end
+
+		it 'renders an erb template from a string' do
+			@output = WrapIO.of do
+				@view.render("Hello View!\n<%= @test %>\n", :test => 'Testing...')
+			end
+			expect(@output).to eq("Hello View!\nTesting...\n")
+		end
+
+		it 'passes the view data as instance variables' do
+			@output = WrapIO.of do
+				@view.render('test', :test => 'Testing...')
+			end
+			expect(@output).to eq("Hello View!\nTesting...\n")
+			expect(@view.instance_variables.include?(:@test)).to eq(true)
+		end
+
+		it 'allows the view to be returned as a string' do
+			@output = @view.render('test', {:test => 'Testing...'}, false)
+			expect(@output).to eq("Hello View!\nTesting...")
+		end
+
+		it 'allows argument substitution for the data and supress output parameters' do
+			@output = @view.render("Hello!", false)
+			expect(@output).to eq("Hello!")
+
+			@output = @view.render("Hello <%= @world %>!", {:world => 'world'}, false)
+			expect(@output).to eq("Hello world!")			
+		end
 	end
 end
