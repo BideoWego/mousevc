@@ -65,6 +65,19 @@ describe Mousevc::App do
 			expect(original_router_id).to_not eq(after_reset_router_id)
 		end
 
+		it 'application performs single execution by default' do
+			mock_inputs = ['', '', '', '', '', 'q']
+			length = mock_inputs.length
+			@output = WrapIO.of(mock_inputs) do
+				@app = Mousevc::App.new(
+					:controller => 'MyController',
+					:action => :loops_until_quits
+				).run
+			end
+			calls = @output.gsub(/\s/, '').gsub('>', '').split('').max.to_i
+			expect(calls).to eq(length + 1)
+		end
+
 		# it 'performs a system clear on each loop' do
 		# 	@output = WrapIO.of do
 		# 		expect(Kernel).to receive(:system).with('clear')
