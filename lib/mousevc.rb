@@ -24,7 +24,7 @@ module Mousevc
 			"",
 			"by",
 			"Bideo Wego",
-			"http://bideowego.com",
+			"http://bideowego.com/mousevc",
 			"",
 			"Documentation",
 			"http://www.rubydoc.info/gems/mousevc"
