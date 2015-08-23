@@ -32,6 +32,15 @@ module Mousevc
 		attr_accessor :looping
 
 		##
+		# @!attribute router
+		#
+		# Returns the current router
+		#
+		# @return [Mousevc::Router] the router
+
+		attr_reader :router
+
+		##
 		# Creates a new +Mousevc::App+ instance
 		# 
 		# @param options [Hash] expects the following keys:
@@ -52,11 +61,13 @@ module Mousevc
 		end
 
 		##
-		# Run the application
+		# Runs the application
 
 		def run
 			reset
 			@looping ? listen : single
+			Input.clear
+			nil
 		end
 
 		##
@@ -90,10 +101,12 @@ module Mousevc
 				)
 			end
 
+			##
+			# Runs the application without looping automatically
+
 			def single
-				Kernel.system('clear') if system_clear?
-				@router.route unless Input.quit?
-				reset if Input.reset?
+				clear_view
+				@router.route
 			end
 
 			##
@@ -106,9 +119,17 @@ module Mousevc
 
 			def listen
 				begin
-					single
+					clear_view
+					@router.route unless Input.quit?
+					reset if Input.reset?
 				end until Input.quit?
-				Input.clear
+			end
+
+			##
+			# Executes a system clear if system clearing is enabled
+
+			def clear_view
+				Kernel.system('clear') if system_clear?
 			end
 	end
 end
