@@ -18,7 +18,7 @@ module Mousevc
 		# Allows clearing of all or some of the models currently stored.
 		# Clears all data and models stored if no keys are provided
 		#
-		# @param [Symbol] a list of keys to clear from the currently stored models
+		# @param args [Symbol] a list of keys to clear from the currently stored models
 
 		def self.clear(*args)
 			if args.empty?
@@ -29,11 +29,20 @@ module Mousevc
 		end
 
 		##
-		# 
+		# Get a stored model by key
+		#
+		# @param key [Symbol] the key under which the model is stored
+		# @return [Mousevc::Model, Any] the stored model or value
 
 		def self.get(key)
 			@@models[key]
 		end
+
+		##
+		# Set the value of a storage key
+		# @raise [Mousevc::Error] if the key already exists
+		#
+		# @param key [Symbol] the key under which the model is stored
 
 		def self.set(key, value)
 			raise Error.new("Cannot persist, a value already exists at: #{key}") unless @@models[key].nil?
