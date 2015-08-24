@@ -62,10 +62,15 @@ module Mousevc
 
 		def route
 			model = nil
-			model = Persistence.get(@model) if @model.is_a?(Symbol)
 			model = Persistence.get(@controller.to_sym) unless Persistence.get(@controller.to_sym).nil?
-			model = Mousevc.factory(@model).new unless model
+			model = Persistence.get(@model) if @model.is_a?(Symbol)
+			unless model
+				model = Mousevc.factory(@model).new
+				Persistence.set(@controller.to_sym, model)
+			end
+
 			view = View.new(:dir => @views)
+
 			controller = Mousevc.factory(@controller).new(
 				:view => view,
 				:model => model,

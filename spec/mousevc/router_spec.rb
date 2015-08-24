@@ -55,6 +55,13 @@ describe Mousevc::Router do
 
 		it 'sends the current controller a persisted model' do
 			WrapIO.of do
+				2.times {@controller = @router.route}
+			end
+			expect(@controller.model.object_id).to eq(Mousevc::Persistence.get(:MyController).object_id)
+		end
+
+		it 'sends the current controller a specific model from persistence' do
+			WrapIO.of do
 				@model = Mousevc::Model.new
 				Mousevc::Persistence.set(:my_model, @model)
 				@router.model = :my_model
