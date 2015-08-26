@@ -1,13 +1,14 @@
 require 'spec_helper'
 
 describe Mousevc::View do
+	let(:dir){"#{File.dirname(__FILE__)}/views"}
 	before do
-		@view = Mousevc::View.new(:dir => 'spec/mousevc/views')
+		@view = Mousevc::View.new(:dir => dir)
 	end
 
 	describe '#dir' do
 		it 'is the string path to the view directory' do
-			expect(@view.dir).to eq('spec/mousevc/views')
+			expect(@view.dir).to eq(dir)
 		end
 
 		it 'is read only' do

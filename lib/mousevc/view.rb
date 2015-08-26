@@ -11,7 +11,7 @@ module Mousevc
 		##
 		# @!attribute dir
 		#
-		# @return [String] the path to the views directory
+		# @return [String] the absolute path to the views directory
 
 		attr_reader :dir
 
@@ -41,11 +41,17 @@ module Mousevc
 		def render(view, *args)
 			data = args[0].is_a?(Hash) ? args[0] : {}
 			output = ! (args[0] == false || args[1] == false)
-			path = "#{Dir.pwd}/#{@dir}/#{view}.txt.erb"
+
+			path = "#{@dir}/#{view}.txt.erb"
+
 			view = File.file?(path) ? File.read(path) : view
+
 			to_ivars(data)
+
 			result = ERB.new(view).result(binding)
+
 			puts result if output
+
 			result
 		end
 

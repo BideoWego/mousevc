@@ -47,7 +47,7 @@ module Mousevc
 		# 	- :controller => [String] name of default controller class
 		# 	- :model => [String] name of default model class
 		# 	- :action => [Symbol] method to call on default controller
-		# 	- :views => [String] relative path to views directory
+		# 	- :views => [String] the absolute path to your views directory
 		# 	- :looping => [Boolean] +true+ if the application should loop, defaults to +false+
 		# 	- :system_clear => [Boolean] +true+ if output should be cleared on update, defaults to +false+
 
