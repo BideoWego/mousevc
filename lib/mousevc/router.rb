@@ -61,8 +61,7 @@ module Mousevc
 		# 1. sending the controller the current action in +@action+
 
 		def route
-			model = nil
-			model = Persistence.get(@controller.to_sym) unless Persistence.get(@controller.to_sym).nil?
+			model = Persistence.get(@controller.to_sym)
 			model = Persistence.get(@model) if @model.is_a?(Symbol)
 			unless model
 				model = Mousevc.factory(@model).new

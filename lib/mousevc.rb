@@ -39,11 +39,10 @@ module Mousevc
 	##
 	# Generates a Mousevc class constant ready for instantiation
 	#
+	# @param class_name [String] the string name of the class
 	# @return [Constant] the class constant
 
 	def self.factory(class_name)
-		"Mousevc::#{class_name}".split('::').inject(Object) do |object, string|
-			object.const_get(string)
-		end
+		Mousevc.const_get(class_name)
 	end
 end

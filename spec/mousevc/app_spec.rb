@@ -15,19 +15,22 @@ describe Mousevc::App do
 	end
 
 	describe '#run' do
-		it 'resets the application by creating a new router' do
-			@app = Mousevc::App.new
-			WrapIO.of {@app.run}
-			router_one = @app.router
-			WrapIO.of {@app.run}
-			router_two = @app.router
-			expect(router_one.object_id).to_not eq(router_two.object_id)
-		end
 
-		it 'runs a single fire application when #looping is false' do
-			@app = Mousevc::App.new
-			expect(@app).to receive(:single)
-			WrapIO.of {@app.run}
+		context 'with a non looping mousevc app' do
+			let(:app) {Mousevc::App.new}
+
+			it 'resets the application by creating a new router' do
+				WrapIO.of {app.run}
+				router_one = app.router
+				WrapIO.of {app.run}
+				router_two = app.router
+				expect(router_one.object_id).to_not eq(router_two.object_id)
+			end
+
+			it 'runs a single fire application when #looping is false' do
+				expect(app).to receive(:single)
+				WrapIO.of {app.run}
+			end
 		end
 
 		it 'runs a listen loop when #looping is true' do

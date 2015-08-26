@@ -40,8 +40,7 @@ module Mousevc
 
 		def render(view, *args)
 			data = args[0].is_a?(Hash) ? args[0] : {}
-			output = true
-			output = false if args[0] == false || args[1] == false
+			output = ! (args[0] == false || args[1] == false)
 			path = "#{Dir.pwd}/#{@dir}/#{view}.txt.erb"
 			view = File.file?(path) ? File.read(path) : view
 			to_ivars(data)
