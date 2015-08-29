@@ -62,6 +62,7 @@ module Mousevc
 
 		def route
 			model = Persistence.get(@controller.to_sym)
+			# TODO if reset, reset Persistence?
 			model = Persistence.get(@model) if @model.is_a?(Symbol)
 			unless model
 				model = Mousevc.factory(@model).new

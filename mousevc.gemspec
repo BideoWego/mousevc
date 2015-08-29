@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["bideowego@gmail.com"]
 
   spec.summary       = %q{A tiny mouse sized MVC framework to jump start command line apps.}
-  #spec.description   = %q{TODO: Write a longer description or delete this line.}
+  # spec.description   = %q{}
   spec.homepage      = "http://bideowego.com/mousevc"
   spec.license       = "MIT"
 

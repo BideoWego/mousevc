@@ -11,6 +11,8 @@ module Mousevc
 		##
 		# @!attribute dir
 		#
+		# @note as of v0.0.6 Mousevc requires that the views path be absolute, e.g +"#{File.dirname(__FILE__)}/views"+
+		#
 		# @return [String] the absolute path to the views directory
 
 		attr_reader :dir

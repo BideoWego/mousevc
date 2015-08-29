@@ -43,6 +43,8 @@ module Mousevc
 		##
 		# Creates a new +Mousevc::App+ instance
 		# 
+		# @note as of v0.0.6 Mousevc requires that the views path be absolute, e.g +"#{File.dirname(__FILE__)}/views"+
+		#
 		# @param options [Hash] expects the following keys:
 		# 	- :controller => [String] name of default controller class
 		# 	- :model => [String] name of default model class
@@ -90,6 +92,8 @@ module Mousevc
 
 			##
 			# Instantiates the router instance.
+			# @todo add callback where a block is called on reset, and event listener functionality
+			#
 			# Passes the router instance the initialization options.
 
 			def reset

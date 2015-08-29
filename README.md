@@ -86,6 +86,7 @@ $ gem install mousevc
 	```
 
 1. Create a class that extends `Mousevc::App`
+	- NOTE: as of v0.0.6 Mousevc requires that the views path be absolute, e.g `"#{File.dirname(__FILE__)}/views"`
 
 	```ruby
 
@@ -98,7 +99,7 @@ $ gem install mousevc
 		:controller => 'JerryController',
 		:model => 'JerryModel',
 		:action => :find_cheese,
-		:views => 'relative/views/directory/path'
+		:views => "#{File.dirname(__FILE__)}/views"
 	).run
 	```
 
