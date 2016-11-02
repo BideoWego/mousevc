@@ -64,3 +64,6 @@ module Mousevc
 	class MyModel < Mousevc::Model
 	end
 end
+
+
+
