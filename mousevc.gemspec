@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{A tiny mouse sized MVC framework to jump start command line apps.}
   # spec.description   = %q{}
-  spec.homepage      = "http://bideowego.com/mousevc"
+  spec.homepage      = "https://github.com/BideoWego/mousevc"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
